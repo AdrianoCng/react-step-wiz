@@ -22,12 +22,6 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/react-step-wiz.es.js",
-      "require": "./dist/react-step-wiz.umd.js"
-    }
-  },
   "main": "./dist/react-step-wiz.umd.js",
   "module": "./dist/react-step-wiz.es.js",
   "types": "./dist/index.d.ts",

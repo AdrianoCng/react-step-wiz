@@ -1,10 +1,13 @@
+import Step from './containers/step/Step';
 import Wizard from './lib';
 
 function App() {
   return (
-    <div>
-      <Wizard test="Wizard" />
-    </div>
+    <Wizard>
+      <Step />
+      <Step />
+      <Step />
+    </Wizard>
   );
 }
 

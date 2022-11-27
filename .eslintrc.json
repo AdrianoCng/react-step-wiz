@@ -22,7 +22,8 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
-    "prettier/prettier": "error",
-    "react/react-in-jsx-scope": "off"
+    "prettier/prettier": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
