@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import tsConfigPaths from 'vite-tsconfig-paths';
 import * as packageJson from './package.json';
-import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,12 +12,12 @@ export default defineConfig({
     }),
     tsConfigPaths(),
     dts({
-      include: [resolve(__dirname, 'src/lib/')],
+      include: ['./src/lib/'],
     }),
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/lib/index.ts'),
+      entry: './src/lib/index.ts',
       name: 'react-step-wiz',
       formats: ['es', 'umd'],
       fileName(format) {
@@ -27,6 +26,11 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [...Object.keys(packageJson.peerDependencies)],
+      output: {
+        globals: {
+          react: 'React',
+        },
+      },
     },
   },
 });
