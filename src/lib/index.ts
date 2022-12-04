@@ -1,4 +1,4 @@
-import useWizard from './contexts/WizardContext';
+import useWizard from './hooks/useWizard';
 import Wizard from './Wizard';
 
 // Types

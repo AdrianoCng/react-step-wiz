@@ -1,11 +1,14 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { IWizardContext, WizardContext } from './contexts/WizardContext';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import WizardContext, { IWizardContext } from './contexts/WizardContext';
+import useFirstRender from './hooks/useFirstRender';
 
 export interface IWizardProps {
   children: React.ReactNode | React.ReactNode[];
+  onStepChange?: () => void;
 }
 
-export default function Wizard({ children }: IWizardProps) {
+export default function Wizard({ children, onStepChange = undefined }: IWizardProps) {
+  const isFirstRender = useFirstRender();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const steps = React.Children.toArray(children);
@@ -44,6 +47,12 @@ export default function Wizard({ children }: IWizardProps) {
     [activeIndex, goNextStep, goPrevStep, goToStep],
   );
 
+  useEffect(() => {
+    if (!onStepChange || isFirstRender) return;
+
+    onStepChange();
+  }, [activeIndex, onStepChange, isFirstRender]);
+
   const renderStep = () => {
     const element = steps[activeIndex];
 
@@ -54,3 +63,7 @@ export default function Wizard({ children }: IWizardProps) {
 
   return <WizardContext.Provider value={contextValue}>{renderStep()}</WizardContext.Provider>;
 }
+
+Wizard.defaultProps = {
+  onStepChange: undefined,
+};
